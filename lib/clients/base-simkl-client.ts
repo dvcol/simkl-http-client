@@ -1,6 +1,6 @@
 import { type BaseBody, BaseClient } from '@dvcol/base-http-client';
 
-import { injectCorsProxyPrefix, parseBodyUrlEncoded, parseUrl } from '@dvcol/base-http-client/utils/client';
+import { injectCorsProxyPrefix, parseBody, parseUrl } from '@dvcol/base-http-client/utils/client';
 import { BaseApiHeaders, BaseHeaderContentType } from '@dvcol/base-http-client/utils/http';
 
 import type { RecursiveRecord } from '@dvcol/common-utils/common/models';
@@ -160,7 +160,7 @@ export class BaseSimklClient extends BaseClient<SimklApiQuery, SimklApiResponse,
    */
   // eslint-disable-next-line class-methods-use-this -- implemented from abstract class
   protected _parseBody<T extends SimklApiParams = SimklApiParams>(template: BaseBody<string | keyof T>, params: T): BodyInit {
-    return parseBodyUrlEncoded(template, params);
+    return parseBody(template, params);
   }
 
   /**

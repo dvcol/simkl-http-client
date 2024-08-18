@@ -1,4 +1,4 @@
-import type { SimklClientSettings } from '~/models/mal-client.model';
+import type { SimklClientSettings } from '~/models/simkl-client.model';
 
 import { Config } from '~/config';
 

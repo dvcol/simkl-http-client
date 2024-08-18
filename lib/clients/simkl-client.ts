@@ -250,7 +250,7 @@ export class SimklClient extends BaseSimklClient {
    *
    * @returns A promise resolving to the imported authentication information.
    */
-  async importAuthentication(auth: SimklClientAuthentication = {}): Promise<SimklClientAuthentication> {
+  importAuthentication(auth: SimklClientAuthentication = {}): SimklClientAuthentication {
     this.updateAuth(auth);
     return this.auth;
   }

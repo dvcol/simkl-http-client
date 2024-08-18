@@ -45,14 +45,44 @@
       "types": "./dist/models/index.d.ts"
     },
     "./api": {
-      "require": "./dist/api/mal-api.endpoints.cjs",
-      "import": "./dist/api/mal-api.endpoints.js",
-      "types": "./dist/api/mal-api.endpoints.d.ts"
+      "require": "./dist/api/simkl-api.endpoints.cjs",
+      "import": "./dist/api/simkl-api.endpoints.js",
+      "types": "./dist/api/simkl-api.endpoints.d.ts"
     },
     "./api/minimal": {
-      "require": "./dist/api/mal-api-minimal.endpoints.cjs",
-      "import": "./dist/api/mal-api-minimal.endpoints.js",
-      "types": "./dist/api/mal-api-minimal.endpoints.d.ts"
+      "require": "./dist/api/simkl-api-minimal.endpoints.cjs",
+      "import": "./dist/api/simkl-api-minimal.endpoints.js",
+      "types": "./dist/api/simkl-api-minimal.endpoints.d.ts"
+    },
+    "./api/authentication": {
+      "require": "./dist/api/endpoints/authentication.endpoint.cjs",
+      "import": "./dist/api/endpoints/authentication.endpoint.js",
+      "types": "./dist/api/endpoints/authentication.endpoint.d.ts"
+    },
+    "./api/calendar": {
+      "require": "./dist/api/endpoints/calendar.endpoint.cjs",
+      "import": "./dist/api/endpoints/calendar.endpoint.js",
+      "types": "./dist/api/endpoints/calendar.endpoint.d.ts"
+    },
+    "./api/checkin": {
+      "require": "./dist/api/endpoints/checkin.endpoint.cjs",
+      "import": "./dist/api/endpoints/checkin.endpoint.js",
+      "types": "./dist/api/endpoints/checkin.endpoint.d.ts"
+    },
+    "./api/ratings": {
+      "require": "./dist/api/endpoints/ratings.endpoint.cjs",
+      "import": "./dist/api/endpoints/ratings.endpoint.js",
+      "types": "./dist/api/endpoints/ratings.endpoint.d.ts"
+    },
+    "./api/redirect": {
+      "require": "./dist/api/endpoints/redirect.endpoint.cjs",
+      "import": "./dist/api/endpoints/redirect.endpoint.js",
+      "types": "./dist/api/endpoints/redirect.endpoint.d.ts"
+    },
+    "./api/search": {
+      "require": "./dist/api/endpoints/search.endpoint.cjs",
+      "import": "./dist/api/endpoints/search.endpoint.js",
+      "types": "./dist/api/endpoints/search.endpoint.d.ts"
     }
   },
   "files": [
@@ -76,7 +106,7 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@dvcol/base-http-client": "^1.12.2",
+    "@dvcol/base-http-client": "^1.13.1",
     "@dvcol/common-utils": "^1.10.0"
   },
   "devDependencies": {
