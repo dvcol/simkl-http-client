@@ -3,6 +3,7 @@ import type { SimklApiExtended, SimklApiParamsExtended, SimklApiParamsPagination
 import type {
   SimklAirDate,
   SimklAiringSorts,
+  SimklAlternativeTitle,
   SimklAnimeAndShowStatuses,
   SimklBestFilters,
   SimklEntityType,
@@ -16,7 +17,6 @@ import type {
   SimklTrailer,
   SimklTrendingIntervals,
 } from '~/models/simkl-common.model';
-
 import type { SimklEpisode, SimklEpisodeMinimal } from '~/models/simkl-episode.model';
 import type { SimklRatings } from '~/models/simkl-rating.model';
 
@@ -36,12 +36,6 @@ export type SimklAnimeShort = {
   year: number;
   type: typeof SimklMediaType.Anime;
   ids: SimklIds<'slug' | 'simkl'>;
-};
-
-export type SimklAnimeAlternativeTitle = {
-  name: string;
-  lang: string;
-  type: 'official' | 'synonym' | string;
 };
 
 export type SimklAnimeStudio = {
@@ -74,7 +68,7 @@ export type SimklAnimeRelation = {
 export type SimklAnimeExtended = SimklAnimeShort & {
   year_start_end: string;
   en_title?: string;
-  alt_titles?: SimklAnimeAlternativeTitle[];
+  alt_titles?: SimklAlternativeTitle[];
   anime_type: SimklAnimeTypes;
   studios?: SimklAnimeStudio[];
   season_name_year?: string;

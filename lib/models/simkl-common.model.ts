@@ -220,3 +220,9 @@ export const SimklBestFilter = {
 } as const;
 
 export type SimklBestFilters = (typeof SimklBestFilter)[keyof typeof SimklBestFilter];
+
+export type SimklAlternativeTitle = {
+  name: string;
+  lang: string;
+  type: 'official' | 'synonym' | string;
+};
