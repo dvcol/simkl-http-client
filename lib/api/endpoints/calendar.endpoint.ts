@@ -3,7 +3,7 @@ import { HttpMethod } from '@dvcol/common-utils/http';
 import type { SimklCalendarAnime, SimklCalendarMonthRequest, SimklCalendarMovie, SimklCalendarShow, SimklMonth } from '~/models/simkl-calendar.model';
 
 import { Config } from '~/config';
-import { SimklClientEndpoint } from '~/models';
+import { SimklClientEndpoint } from '~/models/simkl-client.model';
 
 /**
  * Simkl provides separate JSON data calendar files that can be used to display the "Upcoming", "Next", "Schedule" or "Calendar" sections in your app or within show details cards.

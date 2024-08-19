@@ -1,6 +1,6 @@
-import type { SimklApiExtends, SimklApiParams } from '~/models';
+import type { SimklApiExtends, SimklApiParams } from '~/models/simkl-client.model';
 
-import { SimklApiDiscoverExtended, SimklApiExtended } from '~/models';
+import { SimklApiDiscoverExtended, SimklApiExtended } from '~/models/simkl-client.model';
 
 export const SimklApiTransform = {
   Extends: {

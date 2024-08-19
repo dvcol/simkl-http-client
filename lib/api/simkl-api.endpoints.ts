@@ -18,6 +18,7 @@ export const simklApi = {
   show,
   anime,
   movie,
+  user,
 };
 
 export type SimklApi = typeof simklApi;

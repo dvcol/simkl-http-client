@@ -3,7 +3,7 @@ import { HttpMethod } from '@dvcol/common-utils/http';
 import type { SimklMovie, SimklMovieIdRequest, SimklMovieTrending, SimklMovieTrendingRequest } from '~/models/simkl-movie.model';
 
 import { SimklApiTransform } from '~/api/transforms/simkl-api.transform';
-import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models';
+import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models/simkl-client.model';
 
 export const movie = {
   /**

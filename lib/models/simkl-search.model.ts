@@ -118,10 +118,7 @@ export type SimklSearchFileRequest = {
   hash?: string;
 };
 
-export type SimklSearchFileMovie = SimklMovieShort & {
-  type: 'movie';
-  ids: Partial<SimklIdsExtended>;
-};
+export type SimklSearchFileMovie = SimklMovieShort;
 
 /** Returns episode for a Tv Show or Anime  */
 export type SimklSearchFileEpisode = {

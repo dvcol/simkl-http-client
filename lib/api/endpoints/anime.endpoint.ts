@@ -18,8 +18,9 @@ import type {
 } from '~/models/simkl-anime.model';
 
 import { SimklApiTransform } from '~/api/transforms/simkl-api.transform';
-import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models';
 import { SimklAnimeGenreSection } from '~/models/simkl-anime.model';
+
+import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models/simkl-client.model';
 import { SimklBestFilter, SimklPremiereParam } from '~/models/simkl-common.model';
 
 export const anime = {
