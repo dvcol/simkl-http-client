@@ -1,19 +1,19 @@
-import type { SimklAnimeExtended, SimklAnimeShort } from '~/models/simkl-anime.model';
+import type { SimklAnimeShort } from '~/models/simkl-anime.model';
 import type { SimklApiExtended, SimklApiParamsExtended, SimklApiParamsPagination } from '~/models/simkl-client.model';
 
-import type { SimklCommonQuery, SimklEntityType, SimklIdsExtended } from '~/models/simkl-common.model';
-import type { SimklMovieExtended, SimklMovieShort } from '~/models/simkl-movie.model';
-import type { SimklShowExtended, SimklShowShort } from '~/models/simkl-show.model';
+import type {
+  SimklAnimeAndShowStatuses,
+  SimklCommonQuery,
+  SimklEntityType,
+  SimklIds,
+  SimklIdsExtended,
+  SimklMovieStatuses,
+} from '~/models/simkl-common.model';
+import type { SimklMovieShort } from '~/models/simkl-movie.model';
+import type { SimklRatings } from '~/models/simkl-rating.model';
+import type { SimklShowShort } from '~/models/simkl-show.model';
 
 export type SimklSearchIdRequest = SimklCommonQuery;
-
-export const SimklSearchStatus = {
-  Airing: 'airing',
-  Ended: 'ended',
-  Tba: 'tba',
-  Released: 'released',
-  Upcoming: 'upcoming',
-} as const;
 
 export type SimklSearchEntity = {
   title: string;
@@ -29,27 +29,24 @@ export const SimklSearchEntityType = {
 
 export type SimklSearchEntityTypes = (typeof SimklSearchEntityType)[keyof typeof SimklSearchEntityType];
 
-export type SimklSearchTvStatuses = typeof SimklSearchStatus.Airing | typeof SimklSearchStatus.Ended | typeof SimklSearchStatus.Tba;
-export type SimklSearchMovieStatuses = typeof SimklSearchStatus.Released | typeof SimklSearchStatus.Upcoming;
-
 export type SimklSearchIdShow = SimklSearchEntity & {
   type: typeof SimklSearchEntityType.Tv;
   total_episodes: number;
-  status: SimklSearchTvStatuses;
-  ids: SimklShowShort['ids'];
+  status: SimklAnimeAndShowStatuses;
+  ids: SimklIds<'slug' | 'simkl'>;
 };
 
 export type SimklSearchIdAnime = SimklSearchEntity & {
   type: typeof SimklSearchEntityType.Anime;
   total_episodes: number;
-  status: SimklSearchTvStatuses;
-  ids: SimklShowShort['ids'];
+  status: SimklAnimeAndShowStatuses;
+  ids: SimklIds<'slug' | 'simkl'>;
 };
 
 export type SimklSearchIdMovie = SimklSearchEntity & {
   type: typeof SimklSearchEntityType.Movie;
-  status: SimklSearchMovieStatuses;
-  ids: SimklAnimeShort['ids'];
+  status: SimklMovieStatuses;
+  ids: SimklIds<'slug' | 'simkl'>;
 };
 
 export type SimklSearchIdResponse = (SimklSearchIdShow | SimklSearchIdAnime | SimklSearchIdMovie)[];
@@ -61,12 +58,12 @@ export type SimklSearchTextRequest = {
   SimklApiParamsExtended<typeof SimklApiExtended.Full>;
 
 export type SimklSearchTextShow = SimklSearchEntity & {
-  ids: SimklShowShort['ids'];
+  ids: SimklIds<'simkl_id' | 'slug' | 'tmdb'>;
   url?: string;
   ep_count?: number;
   rank?: number;
-  status?: SimklSearchTvStatuses;
-  ratings?: SimklShowExtended['ratings'];
+  status?: SimklAnimeAndShowStatuses;
+  ratings?: SimklRatings<'simkl' | 'imdb'>;
 };
 
 export type SimklSearchTextAnime = SimklSearchEntity & {
@@ -77,17 +74,17 @@ export type SimklSearchTextAnime = SimklSearchEntity & {
   url?: string;
   ep_count?: number;
   rank?: number;
-  status?: SimklSearchTvStatuses;
-  ratings?: SimklAnimeExtended['ratings'];
-  ids: SimklAnimeShort['ids'];
+  status?: SimklAnimeAndShowStatuses;
+  ratings?: SimklRatings<'simkl' | 'mal'>;
+  ids: SimklIds<'simkl_id' | 'slug' | 'tmdb'>;
 };
 
 export type SimklSearchTextMovie = SimklSearchEntity & {
-  ids: SimklAnimeShort['ids'];
+  ids: SimklIds<'simkl_id' | 'slug' | 'tmdb'>;
   all_titles?: string[];
   url?: string;
   rank?: number;
-  ratings?: SimklMovieExtended['ratings'];
+  ratings?: SimklRatings<'simkl' | 'imdb'>;
 };
 
 export type SimklSearchTextResponse<T extends SimklSearchEntityTypes | typeof SimklEntityType.Unknown = typeof SimklEntityType.Unknown> =

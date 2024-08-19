@@ -1,12 +1,8 @@
-import type { SimklAnimeShort, SimklAnimeTypes } from '~/models/simkl-anime.model';
+import type { SimklAnimeTypes } from '~/models/simkl-anime.model';
 
-import type { SimklEntityType, SimklMediaType, SimklMediaTypes } from '~/models/simkl-common.model';
-import type { SimklCalendarEpisode } from '~/models/simkl-episode.model';
-
-import type { SimklMovieShort } from '~/models/simkl-movie.model';
+import type { SimklEntityType, SimklIds, SimklMediaType, SimklMediaTypes } from '~/models/simkl-common.model';
+import type { SimklEpisodeMinimal } from '~/models/simkl-episode.model';
 import type { SimklRatings } from '~/models/simkl-rating.model';
-
-import type { SimklShowShort } from '~/models/simkl-show.model';
 
 export type SimklMonth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
@@ -21,22 +17,24 @@ export type SimklCalendarEntity = {
   date: string;
   release_date: string;
   rank: number;
-  ratings: SimklRatings;
   url: string;
 };
 
 export type SimklCalendarMovie = SimklCalendarEntity & {
-  ids: SimklMovieShort['ids'];
+  ids: SimklIds<'simkl_id' | 'slug' | 'tmdb' | 'imdb'>;
+  ratings: SimklRatings<'simkl'>;
 };
 
 export type SimklCalendarShow = SimklCalendarEntity & {
-  ids: SimklShowShort['ids'];
-  episode: SimklCalendarEpisode;
+  ids: SimklIds<'simkl_id' | 'slug' | 'tmdb' | 'imdb'>;
+  episode: SimklEpisodeMinimal;
+  ratings: SimklRatings<'simkl'>;
 };
 
 export type SimklCalendarAnime = SimklCalendarEntity & {
-  ids: SimklAnimeShort['ids'];
-  episode: Omit<SimklCalendarEpisode, 'season'>;
+  ids: SimklIds<'simkl_id' | 'slug' | 'tmdb' | 'mal'>;
+  episode: Omit<SimklEpisodeMinimal, 'season'>;
+  ratings: SimklRatings<'simkl'>;
   anime_type: SimklAnimeTypes;
 };
 

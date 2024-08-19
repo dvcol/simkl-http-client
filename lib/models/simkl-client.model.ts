@@ -69,6 +69,7 @@ export const SimklApiDiscoverExtended = {
   Theater: 'theater',
   Genres: 'genres',
   Tmdb: 'tmdb',
+  All: ['title', 'slug', 'overview', 'metadata', 'theater', 'genres', 'tmdb'] as const,
 } as const;
 
 /**
@@ -76,21 +77,21 @@ export const SimklApiDiscoverExtended = {
  * @see {SimklApiDiscoverExtended}
  * @see [documentation]{@link https://simkl.docs.apiary.io/#introduction/about-simkl-api/full-info}
  */
-export type SimklApiDiscoverExtends = (typeof SimklApiDiscoverExtended)[keyof typeof SimklApiDiscoverExtended];
+export type SimklApiDiscoverExtends = (typeof SimklApiDiscoverExtended)[keyof Omit<typeof SimklApiDiscoverExtended, 'All'>];
 
 export type SimklApiParamsExtended<E extends SimklApiExtends = typeof SimklApiExtended.Unknown> = E extends typeof SimklApiExtended.Full
   ? {
       /** Extended response with full information */
-      extended?: typeof SimklApiExtended.Full;
+      extended?: boolean | typeof SimklApiExtended.Full;
     }
   : E extends typeof SimklApiExtended.Discover
     ? {
         /** Extended response with optional discover information  */
-        extended?: SimklApiDiscoverExtends | SimklApiDiscoverExtends[];
+        extended?: boolean | string | SimklApiDiscoverExtends | SimklApiDiscoverExtends[];
       }
     : {
         /** Extended response with full or optional discover information */
-        extended?: typeof SimklApiExtended.Full | SimklApiDiscoverExtends | SimklApiDiscoverExtends[];
+        extended?: boolean | typeof SimklApiExtended.Full | SimklApiDiscoverExtends | SimklApiDiscoverExtends[];
       };
 
 /**
@@ -111,10 +112,9 @@ export type SimklApiClientPagination = {
 
 export type SimklApiParamsPagination = Partial<Pick<SimklApiClientPagination, 'page' | 'limit'>>;
 
-export type SimklApiParams<
-  T extends RecursiveRecord = RecursiveRecord,
-  E extends SimklApiExtends = typeof SimklApiExtended.Unknown,
-> = SimklApiParamsExtended<E> & SimklApiParamsPagination & T;
+export type SimklApiParams<T extends RecursiveRecord = RecursiveRecord, E extends SimklApiExtends = SimklApiExtends> = SimklApiParamsExtended<E> &
+  SimklApiParamsPagination &
+  T;
 
 export type SimklClientAuthentication = {
   access_token?: string;

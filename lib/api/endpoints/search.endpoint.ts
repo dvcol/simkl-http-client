@@ -89,6 +89,12 @@ export const search = {
         },
       },
     },
+    transform: params => {
+      if (params.extended !== undefined && typeof params.extended === 'boolean') {
+        return { ...params, extended: params.extended ? SimklApiExtended.Full : undefined };
+      }
+      return params;
+    },
     validate: params => {
       if (params.limit) ValidatorUtils.minMax(params.limit, { min: 0, max: 50, name: 'limit' });
       if (params.page) ValidatorUtils.minMax(params.page, { min: 0, max: 20, name: 'page' });

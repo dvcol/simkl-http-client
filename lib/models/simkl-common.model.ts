@@ -1,40 +1,56 @@
-export type SimklIds = {
+export type SimklIdsShort = {
+  simkl: number;
   simkl_id: number;
-  imdb: string;
-  tvdb: number;
-  tmdb: number;
-  mal: number;
-  anidb: number;
   slug: string;
+  imdb: number | string;
+  tvdb: number | string;
+  tmdb: number | string;
+  mal: number | string;
 };
 
-export type SimklIdsExtended = SimklIds & {
-  simkl: number;
-  netflix: number;
+export type SimklIdsExtended = SimklIdsShort & {
+  netflix: number | string;
   hulu: string;
 
   // Anime
+  anidb: number | string;
   animeplanet: string;
-  anilist: number;
-  ann: number;
-  schel: number;
-  anison: number;
-  anisearch: number;
+  anilist: number | string;
+  ann: number | string;
+  schel: number | string;
+  anison: number | string;
+  anisearch: number | string;
   crunchyroll: string;
-  kitsu: number;
-  livechart: number;
+  kitsu: number | string;
+  livechart: number | string;
+  allcin: number | string;
 
   // Shows
   tvdbslug: string;
   zap2it: string;
-  tmdbtv: number;
+  tmdbtv: number | string;
   traktslug: string;
 
   // Movies
   tvdbmslug: string;
-  tvdbm: number;
+  tvdbm: number | string;
   letterslug: string;
-  moviedb: number;
+  moviedb: number | string;
+
+  // Socials
+  fb: string;
+  instagram: string;
+  tw: string;
+
+  // Website
+  wikien: string;
+  wikijp: string;
+  offjp: string;
+  offen: string;
+};
+
+export type SimklIds<K extends keyof T, T = SimklIdsExtended> = Partial<SimklIdsExtended> & {
+  [P in K]: T[P];
 };
 
 export const SimklEntityType = {
@@ -105,3 +121,37 @@ export type SimklInfoQuery = {
 };
 
 export type SimklCommonQuery = SimklIdQuery & SimklInfoQuery;
+
+export type SimklAirDate = {
+  day: string;
+  time: string;
+  timezone: string;
+};
+
+export const SimklAnimeAndShowStatus = {
+  Airing: 'airing',
+  Ended: 'ended',
+  Tba: 'tba',
+} as const;
+
+export type SimklAnimeAndShowStatuses = (typeof SimklAnimeAndShowStatus)[keyof typeof SimklAnimeAndShowStatus];
+
+export const SimklMovieStatus = {
+  Released: 'released',
+  Upcoming: 'upcoming',
+} as const;
+
+export type SimklMovieStatuses = (typeof SimklMovieStatus)[keyof typeof SimklMovieStatus];
+
+export const SimklMediaStatus = {
+  ...SimklAnimeAndShowStatus,
+  ...SimklMovieStatus,
+} as const;
+
+export type SimklMediaStatuses = (typeof SimklMediaStatus)[keyof typeof SimklMediaStatus];
+
+export type SimklTrailer = {
+  name: string;
+  youtube: string;
+  size: number;
+};

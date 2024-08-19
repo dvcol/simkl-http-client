@@ -5,10 +5,19 @@ export type SimklRatingScore = {
   votes: number;
 };
 
-export type SimklRatings = {
+export type SimklRatingsBase = {
   simkl: SimklRatingScore;
   imdb?: SimklRatingScore;
   mal?: SimklRatingScore & { rank: number };
+};
+
+export type SimklRatingsExtended = SimklRatingsBase & {
+  imdb?: SimklRatingScore;
+  mal?: SimklRatingScore & { rank: number };
+};
+
+export type SimklRatings<K extends keyof T, T = SimklRatingsExtended> = Partial<SimklRatingsExtended> & {
+  [P in K]: T[P];
 };
 
 export type SimklRating = {
