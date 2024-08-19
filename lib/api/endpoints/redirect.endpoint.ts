@@ -2,7 +2,7 @@ import { HttpMethod } from '@dvcol/common-utils/http';
 
 import type { SimklRedirectRequest, SimklRedirectWatchedRequest } from '~/models/simkl-redirect.model';
 
-import { SimklApiAuthType, SimklClientEndpoint } from '~/models';
+import { SimklApiAuthType, SimklClientEndpoint } from '~/models/simkl-client.model';
 
 /**
  * Redirect to Simkl, trailer or Twitter

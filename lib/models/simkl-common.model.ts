@@ -130,6 +130,7 @@ export type SimklAirDate = {
 
 export const SimklAnimeAndShowStatus = {
   Airing: 'airing',
+  Ongoing: 'ongoing',
   Ended: 'ended',
   Tba: 'tba',
 } as const;
@@ -155,3 +156,67 @@ export type SimklTrailer = {
   youtube: string;
   size: number;
 };
+
+export const SimklTrendingInterval = {
+  Today: 'today',
+  Week: 'week',
+  Month: 'month',
+} as const;
+
+export type SimklTrendingIntervals = (typeof SimklTrendingInterval)[keyof typeof SimklTrendingInterval];
+
+export const SimklGenreYear = {
+  All: 'all-years',
+  Today: 'today',
+  ThisWeek: 'this-week',
+  ThisMonth: 'this-month',
+  ThisYear: 'this-year',
+} as const;
+
+export type SimklGenreYears = (typeof SimklGenreYear)[keyof typeof SimklGenreYear];
+
+export const SimklGenreSort = {
+  PopularToday: 'popular-today',
+  PopularThisWeek: 'popular-this-week',
+  PopularThisMonth: 'popular-this-month',
+  Rank: 'rank',
+  Votes: 'votes',
+  ReleaseDate: 'release-date',
+  LastAirDate: 'last-air-date',
+  AlphabetAZ: 'a-z',
+  AlphabetZA: 'z-a',
+} as const;
+
+export type SimklGenreSorts = (typeof SimklGenreSort)[keyof typeof SimklGenreSort];
+
+export const SimklPremiereParam = {
+  New: 'new',
+  Soon: 'soon',
+} as const;
+
+export type SimklPremiereParams = (typeof SimklPremiereParam)[keyof typeof SimklPremiereParam];
+
+export const SimklPremiereDate = {
+  Today: 'today',
+  Tomorrow: 'tomorrow',
+} as const;
+
+export type SimklPremiereDates = (typeof SimklPremiereDate)[keyof typeof SimklPremiereDate];
+
+export const SimklAiringSort = {
+  Time: 'time',
+  Rank: 'rank',
+  Popularity: 'popularity',
+} as const;
+
+export type SimklAiringSorts = (typeof SimklAiringSort)[keyof typeof SimklAiringSort];
+
+export const SimklBestFilter = {
+  Year: 'year',
+  Month: 'month',
+  All: 'all',
+  Voted: 'voted',
+  Watched: 'watched',
+} as const;
+
+export type SimklBestFilters = (typeof SimklBestFilter)[keyof typeof SimklBestFilter];

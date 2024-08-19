@@ -2,12 +2,19 @@ import type { SimklApiExtended, SimklApiParamsExtended, SimklApiParamsPagination
 
 import type {
   SimklAirDate,
+  SimklAiringSorts,
   SimklAnimeAndShowStatuses,
+  SimklBestFilters,
   SimklEntityType,
   SimklEntityTypes,
+  SimklGenreSorts,
+  SimklGenreYears,
   SimklIds,
   SimklMediaType,
+  SimklPremiereDates,
+  SimklPremiereParams,
   SimklTrailer,
+  SimklTrendingIntervals,
 } from '~/models/simkl-common.model';
 import type { SimklEpisodeMinimal } from '~/models/simkl-episode.model';
 import type { SimklRatings } from '~/models/simkl-rating.model';
@@ -65,17 +72,9 @@ export type SimklShowEpisodesRequest = {
   id: number | string;
 } & SimklApiParamsExtended<typeof SimklApiExtended.Full>;
 
-export const SimklShowTrendingInterval = {
-  Today: 'today',
-  Week: 'week',
-  Month: 'month',
-} as const;
-
-export type SimklShowTrendingIntervals = (typeof SimklShowTrendingInterval)[keyof typeof SimklShowTrendingInterval];
-
 export type SimklShowTrendingRequest = {
   /** Filter within the time period. */
-  interval?: SimklShowTrendingIntervals;
+  interval?: SimklTrendingIntervals | string;
 } & SimklApiParamsExtended<typeof SimklApiExtended.Discover>;
 
 export type SimklShowTrendingShort = {
@@ -199,30 +198,6 @@ export const SimklShowGenreNetwork = {
 
 export type SimklShowGenreNetworks = (typeof SimklShowGenreNetwork)[keyof typeof SimklShowGenreNetwork];
 
-export const SimklShowGenreYear = {
-  All: 'all-years',
-  Today: 'today',
-  ThisWeek: 'this-week',
-  ThisMonth: 'this-month',
-  ThisYear: 'this-year',
-} as const;
-
-export type SimklShowGenreYears = (typeof SimklShowGenreYear)[keyof typeof SimklShowGenreYear];
-
-export const SimklShowGenreSort = {
-  PopularToday: 'popular-today',
-  PopularThisWeek: 'popular-this-week',
-  PopularThisMonth: 'popular-this-month',
-  Rank: 'rank',
-  Votes: 'votes',
-  ReleaseDate: 'release-date',
-  LastAirDate: 'last-air-date',
-  AlphabetAZ: 'a-z',
-  AlphabetZA: 'z-a',
-} as const;
-
-export type SimklShowGenreSorts = (typeof SimklShowGenreSort)[keyof typeof SimklShowGenreSort];
-
 export type SimklShowGenreRequest = {
   /** Default: all */
   genre?: SimklShowGenreSections | string;
@@ -233,9 +208,9 @@ export type SimklShowGenreRequest = {
   /** Default: all-networks (empty) */
   network?: SimklShowGenreNetworks | string;
   /** Default: 2010s */
-  year?: SimklShowGenreYears | string;
+  year?: SimklGenreYears | string;
   /** Default: rank */
-  sort?: SimklShowGenreSorts | string;
+  sort?: SimklGenreSorts | string;
 } & SimklApiParamsPagination;
 
 export type SimklShowGenre = {
@@ -245,17 +220,10 @@ export type SimklShowGenre = {
   url: string;
   poster: string;
   fanart: string;
-  ids: SimklIds<'simkl_id' | 'slug'>;
   rank: number;
+  ids: SimklIds<'simkl_id' | 'slug'>;
   ratings: SimklRatings<'simkl' | 'imdb'>;
 };
-
-export const SimklShowPremiereParam = {
-  New: 'new',
-  Soon: 'soon',
-} as const;
-
-export type SimklShowPremiereParams = (typeof SimklShowPremiereParam)[keyof typeof SimklShowPremiereParam];
 
 export const SimklShowPremiereType = {
   All: 'all',
@@ -267,7 +235,7 @@ export const SimklShowPremiereType = {
 export type SimklShowPremiereTypes = (typeof SimklShowPremiereType)[keyof typeof SimklShowPremiereType];
 
 export type SimklShowPremieresRequest = {
-  param: SimklShowPremiereParams | string;
+  param: SimklPremiereParams | string;
   type?: SimklShowPremiereTypes | string;
 } & SimklApiParamsPagination;
 
@@ -277,51 +245,26 @@ export type SimklShowPremiere = {
   date: string;
   url: string;
   poster: string;
-  ids: SimklIds<'simkl_id' | 'slug'>;
   rank?: number;
+  ids: SimklIds<'simkl_id' | 'slug'>;
   ratings?: SimklRatings<'simkl' | 'imdb'>;
 };
 
-export const SimklShowPremiereDate = {
-  Today: 'today',
-  Tomorrow: 'tomorrow',
-} as const;
-
-export type SimklShowPremiereDates = (typeof SimklShowPremiereDate)[keyof typeof SimklShowPremiereDate];
-
-export const SimklShowAiringSort = {
-  Time: 'time',
-  Rank: 'rank',
-  Popularity: 'popularity',
-} as const;
-
-export type SimklShowAiringSorts = (typeof SimklShowAiringSort)[keyof typeof SimklShowAiringSort];
-
 export type SimklShowAiringRequest = {
-  date?: SimklShowPremiereDates | string;
-  sort?: SimklShowAiringSorts | string;
+  date?: SimklPremiereDates | string;
+  sort?: SimklAiringSorts | string;
 };
 
 export type SimklShowAiring = {
   title: string;
   year: number;
   date: string;
+  url: string;
   poster: string;
   rank?: number;
-  url: string;
   ids: SimklIds<'simkl_id' | 'slug'>;
   episode: SimklEpisodeMinimal;
 };
-
-export const SimklShowBestFilter = {
-  Year: 'year',
-  Month: 'month',
-  All: 'all',
-  Voted: 'voted',
-  Watched: 'watched',
-} as const;
-
-export type SimklShowBestFilters = (typeof SimklShowBestFilter)[keyof typeof SimklShowBestFilter];
 
 export const SimklShowBestType = {
   Series: 'series',
@@ -333,7 +276,7 @@ export const SimklShowBestType = {
 export type SimklShowBestTypes = (typeof SimklShowBestType)[keyof typeof SimklShowBestType];
 
 export type SimklShowBestRequest = {
-  filter: SimklShowBestFilters | string;
+  filter: SimklBestFilters | string;
   type?: SimklShowBestTypes | string;
 };
 

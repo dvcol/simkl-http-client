@@ -2,7 +2,7 @@ import { HttpMethod } from '@dvcol/common-utils/http';
 
 import type { SimklCheckinRequest } from '~/models/simkl-checkin.model';
 
-import { SimklApiAuthType, SimklClientEndpoint } from '~/models';
+import { SimklApiAuthType, SimklClientEndpoint } from '~/models/simkl-client.model';
 
 /**
  * Check into an item

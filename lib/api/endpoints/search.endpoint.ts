@@ -9,7 +9,8 @@ import type {
   SimklSearchTextResponse,
 } from '~/models/simkl-search.model';
 
-import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models';
+import { SimklApiTransform } from '~/api/transforms/simkl-api.transform';
+import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models/simkl-client.model';
 
 export const search = {
   /**
@@ -89,12 +90,7 @@ export const search = {
         },
       },
     },
-    transform: params => {
-      if (params.extended !== undefined && typeof params.extended === 'boolean') {
-        return { ...params, extended: params.extended ? SimklApiExtended.Full : undefined };
-      }
-      return params;
-    },
+    transform: SimklApiTransform.Extends[SimklApiExtended.Full],
     validate: params => {
       if (params.limit) ValidatorUtils.minMax(params.limit, { min: 0, max: 50, name: 'limit' });
       if (params.page) ValidatorUtils.minMax(params.page, { min: 0, max: 20, name: 'page' });

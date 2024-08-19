@@ -1,40 +1,38 @@
 import { HttpMethod } from '@dvcol/common-utils/http';
 
-import type { SimklEpisode } from '~/models/simkl-episode.model';
-
 import type {
-  SimklShow,
-  SimklShowAiring,
-  SimklShowAiringRequest,
-  SimklShowBest,
-  SimklShowBestRequest,
-  SimklShowEpisodesRequest,
-  SimklShowGenre,
-  SimklShowGenreRequest,
-  SimklShowIdRequest,
-  SimklShowPremiere,
-  SimklShowPremieresRequest,
-  SimklShowTrending,
-  SimklShowTrendingRequest,
-} from '~/models/simkl-show.model';
+  SimklAnime,
+  SimklAnimeAiring,
+  SimklAnimeAiringRequest,
+  SimklAnimeBest,
+  SimklAnimeBestRequest,
+  SimklAnimeEpisode,
+  SimklAnimeEpisodesRequest,
+  SimklAnimeGenre,
+  SimklAnimeGenreRequest,
+  SimklAnimeIdRequest,
+  SimklAnimePremiere,
+  SimklAnimePremieresRequest,
+  SimklAnimeTrending,
+  SimklAnimeTrendingRequest,
+} from '~/models/simkl-anime.model';
 
 import { SimklApiTransform } from '~/api/transforms/simkl-api.transform';
-import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models/simkl-client.model';
+import { SimklApiAuthType, SimklApiExtended, SimklClientEndpoint } from '~/models';
+import { SimklAnimeGenreSection } from '~/models/simkl-anime.model';
 import { SimklBestFilter, SimklPremiereParam } from '~/models/simkl-common.model';
-import { SimklShowGenreSection } from '~/models/simkl-show.model';
 
-export const show = {
+export const anime = {
   /**
-   * Get detail info about the TV Show
+   * Get detail info about the Anime
    *
-   * @auth client
-   * @extended full
+   * Same as /tv/:id endpoint + added anime_type,en_title fields.
    *
-   * @see [show-summary](https://simkl.docs.apiary.io/reference/tv/summary/get-detail-info-about-the-tv-show}
+   * @see [anime-summary](https://simkl.docs.apiary.io/reference/anime/summary/get-detail-info-about-the-anime}
    */
-  id: new SimklClientEndpoint<SimklShowIdRequest, SimklShow>({
+  id: new SimklClientEndpoint<SimklAnimeIdRequest, SimklAnime>({
     method: HttpMethod.GET,
-    url: '/tv/:id',
+    url: '/anime/:id',
     opts: {
       auth: SimklApiAuthType.Client,
       extends: SimklApiExtended.Full,
@@ -50,16 +48,16 @@ export const show = {
     transform: SimklApiTransform.Extends[SimklApiExtended.Full],
   }),
   /**
-   * Get TV Show episodes
+   * Get Anime episodes
    *
    * @auth client
    * @extended full
    *
-   * @see [show-episodes](https://simkl.docs.apiary.io/reference/tv/episodes/get-tv-show-episodes}
+   * @see [anime-episodes](https://simkl.docs.apiary.io/reference/anime/episodes/get-anime-episodes}
    */
-  episodes: new SimklClientEndpoint<SimklShowEpisodesRequest, SimklEpisode[]>({
+  episodes: new SimklClientEndpoint<SimklAnimeEpisodesRequest, SimklAnimeEpisode[]>({
     method: HttpMethod.GET,
-    url: '/tv/episodes/:id',
+    url: '/anime/episodes/:id',
     opts: {
       auth: SimklApiAuthType.Client,
       extends: SimklApiExtended.Full,
@@ -72,24 +70,19 @@ export const show = {
         },
       },
     },
-    transform: params => {
-      if (params.extended !== undefined && typeof params.extended === 'boolean') {
-        return { ...params, extended: params.extended ? SimklApiExtended.Full : undefined };
-      }
-      return params;
-    },
+    transform: SimklApiTransform.Extends[SimklApiExtended.Full],
   }),
   /**
-   * Get trending TV series
+   * Get trending anime series
    *
    * @auth client
    * @extended discover
    *
-   * @see [show-trending](https://simkl.docs.apiary.io/reference/tv/trending/get-trending-tv-series}
+   * @see [anime-trending](https://simkl.docs.apiary.io/reference/anime/trending/get-trending-anime-series}
    */
-  trending: new SimklClientEndpoint<SimklShowTrendingRequest, SimklShowTrending[]>({
+  trending: new SimklClientEndpoint<SimklAnimeTrendingRequest, SimklAnimeTrending[]>({
     method: HttpMethod.GET,
-    url: '/tv/trending/:interval',
+    url: '/anime/trending/:interval',
     opts: {
       auth: SimklApiAuthType.Client,
       extends: SimklApiExtended.Discover,
@@ -107,19 +100,19 @@ export const show = {
   /**
    * Get items filtered by genre, years etc...
    *
-   * This endpoint accepts all parameters from the https://simkl.com/tv/all/, select the necessary filters and copy parameters from the url.
+   * This endpoint accepts all parameters from the https://simkl.com/anime/all/, select the necessary filters and copy parameters from the url.
    * Genres API duplicates the urls of the Genres on the website so create a filter on the website and add it to genres API.
    *
    * @auth client
    * @pagination true
    *
-   * @see [show-genres](https://simkl.docs.apiary.io/reference/tv/genres/get-items-filtered-by-genre,-years-etc...}
+   * @see [anime-genres](https://simkl.docs.apiary.io/reference/anime/genres/get-items-filtered-by-genre,-years-etc...}
    */
-  genres: new SimklClientEndpoint<SimklShowGenreRequest, SimklShowGenre[]>({
+  genres: new SimklClientEndpoint<SimklAnimeGenreRequest, SimklAnimeGenre[]>({
     method: HttpMethod.GET,
-    url: '/tv/genres/:genre/:type/:country/:network/:year/:sort',
+    url: '/anime/genres/:genre/:type/:network/:year/:sort',
     seed: {
-      genre: SimklShowGenreSection.All,
+      genre: SimklAnimeGenreSection.All,
     },
     opts: {
       auth: SimklApiAuthType.Client,
@@ -128,7 +121,6 @@ export const show = {
         path: {
           genre: false,
           type: false,
-          country: false,
           network: false,
           year: false,
           sort: false,
@@ -140,17 +132,18 @@ export const show = {
       },
     },
   }),
+
   /**
    * Get latest premieres
    *
    * @auth client
    * @pagination true
    *
-   * @see [show-premieres](https://simkl.docs.apiary.io/reference/tv/premieres/get-latest-premieres}
+   * @see [anime-premieres](https://simkl.docs.apiary.io/reference/anime/premieres/get-latest-premieres}
    */
-  premieres: new SimklClientEndpoint<SimklShowPremieresRequest, SimklShowPremiere[]>({
+  premieres: new SimklClientEndpoint<SimklAnimePremieresRequest, SimklAnimePremiere[]>({
     method: HttpMethod.GET,
-    url: '/tv/premieres/:param',
+    url: '/anime/premieres/:param',
     seed: {
       param: SimklPremiereParam.New,
     },
@@ -171,15 +164,15 @@ export const show = {
     },
   }),
   /**
-   * Get Airing TV Shows
+   * Get Airing Anime
    *
    * @auth client
    *
-   * @see [show-airing](https://simkl.docs.apiary.io/reference/tv/airing/get-airing-tv-shows}
+   * @see [anime-airing](https://simkl.docs.apiary.io/reference/anime/airing/get-airing-anime}
    */
-  airing: new SimklClientEndpoint<SimklShowAiringRequest, SimklShowAiring[]>({
+  airing: new SimklClientEndpoint<SimklAnimeAiringRequest, SimklAnimeAiring[]>({
     method: HttpMethod.GET,
-    url: '/tv/airing',
+    url: '/anime/airing',
     opts: {
       auth: SimklApiAuthType.Client,
       parameters: {
@@ -191,15 +184,15 @@ export const show = {
     },
   }),
   /**
-   * Get best of all TV Shows
+   * Get best of all Anime
    *
    * @auth client
    *
-   * @see [show-best](https://simkl.docs.apiary.io/reference/tv/best/get-best-of-all-tv-shows}
+   * @see [anime-best](https://simkl.docs.apiary.io/reference/anime/best/get-best-of-all-anime}
    */
-  best: new SimklClientEndpoint<SimklShowBestRequest, SimklShowBest[]>({
+  best: new SimklClientEndpoint<SimklAnimeBestRequest, SimklAnimeBest[]>({
     method: HttpMethod.GET,
-    url: '/tv/best/:filter',
+    url: '/anime/best/:filter',
     seed: {
       filter: SimklBestFilter.All,
     },
