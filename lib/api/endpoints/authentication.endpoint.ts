@@ -133,13 +133,15 @@ export const authentication = {
      */
     status: new SimklClientEndpoint<SimklAuthenticationCodeStatusRequest, SimklAuthenticationCodeStatusResponse, false>({
       method: HttpMethod.GET,
-      url: '/oauth/pin',
+      url: '/oauth/pin/:user_code',
       opts: {
         cache: false,
         parameters: {
+          path: {
+            user_code: true,
+          },
           query: {
             client_id: true,
-            user_code: true,
           },
         },
       },

@@ -1,4 +1,4 @@
-import { PKCECodeGenerator } from '@dvcol/common-utils/common/crypto';
+import { randomHex } from '@dvcol/common-utils/common/crypto';
 
 import type { BaseInit } from '@dvcol/base-http-client';
 
@@ -75,7 +75,7 @@ export class SimklClient extends BaseSimklClient {
    * @see [authorize]{@link https://simkl.docs.apiary.io/#reference/authentication-oauth-2.0/authorize/authorize-application}
    */
   async authorize({ redirect, redirect_uri, ...request }: SimklAuthorizeQuery = {}) {
-    const state = request.state ?? (await PKCECodeGenerator.code());
+    const state = request.state ?? randomHex();
     this.updateAuth(auth => ({ ...auth, state }));
     const init: BaseInit = { credentials: 'omit' };
     if (redirect) init.redirect = redirect;
@@ -103,8 +103,8 @@ export class SimklClient extends BaseSimklClient {
    *
    * @see [authorize]{@link https://simkl.docs.apiary.io/#reference/authentication-oauth-2.0/authorize/authorize-application}
    */
-  async resolveAuthorizeUrl({ redirect_uri, ...request }: Omit<SimklAuthorizeQuery, 'redirect'> = {}) {
-    const state = request.state ?? (await PKCECodeGenerator.code());
+  resolveAuthorizeUrl({ redirect_uri, ...request }: Omit<SimklAuthorizeQuery, 'redirect'> = {}) {
+    const state = request.state ?? randomHex();
     this.updateAuth(auth => ({ ...auth, state }));
     return this.authentication.authorize
       .resolve({
@@ -222,13 +222,13 @@ export class SimklClient extends BaseSimklClient {
       const pollDevice = async () => {
         try {
           const body = await this._devicePolling(poll, timeout);
-          if (body) return _resolve(body);
+          if (!body) return;
+          _resolve(body);
         } catch (err) {
           _reject(err);
-        } finally {
-          this._clearPolling();
-          this._clearPoll();
         }
+        this._clearPolling();
+        this._clearPoll();
       };
       this.polling = setInterval(pollDevice, poll.interval * 1000);
     }) as CancellablePolling;

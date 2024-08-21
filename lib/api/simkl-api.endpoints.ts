@@ -7,6 +7,8 @@ import { ratings } from '~/api/endpoints/ratings.endpoint';
 import { redirect } from '~/api/endpoints/redirect.endpoint';
 import { search } from '~/api/endpoints/search.endpoint';
 import { show } from '~/api/endpoints/show.endpoint';
+import { sync } from '~/api/endpoints/sync.endpoint';
+import { user } from '~/api/endpoints/user.endpoint';
 
 export const simklApi = {
   authentication,
@@ -18,6 +20,7 @@ export const simklApi = {
   show,
   anime,
   movie,
+  sync,
   user,
 };
 

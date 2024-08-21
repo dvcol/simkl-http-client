@@ -54,6 +54,11 @@
       "import": "./dist/api/simkl-api-minimal.endpoints.js",
       "types": "./dist/api/simkl-api-minimal.endpoints.d.ts"
     },
+    "./api/anime": {
+      "require": "./dist/api/endpoints/anime.endpoint.cjs",
+      "import": "./dist/api/endpoints/anime.endpoint.js",
+      "types": "./dist/api/endpoints/anime.endpoint.d.ts"
+    },
     "./api/authentication": {
       "require": "./dist/api/endpoints/authentication.endpoint.cjs",
       "import": "./dist/api/endpoints/authentication.endpoint.js",
@@ -69,6 +74,11 @@
       "import": "./dist/api/endpoints/checkin.endpoint.js",
       "types": "./dist/api/endpoints/checkin.endpoint.d.ts"
     },
+    "./api/movie": {
+      "require": "./dist/api/endpoints/movie.endpoint.cjs",
+      "import": "./dist/api/endpoints/movie.endpoint.js",
+      "types": "./dist/api/endpoints/movie.endpoint.d.ts"
+    },
     "./api/ratings": {
       "require": "./dist/api/endpoints/ratings.endpoint.cjs",
       "import": "./dist/api/endpoints/ratings.endpoint.js",
@@ -83,6 +93,21 @@
       "require": "./dist/api/endpoints/search.endpoint.cjs",
       "import": "./dist/api/endpoints/search.endpoint.js",
       "types": "./dist/api/endpoints/search.endpoint.d.ts"
+    },
+    "./api/show": {
+      "require": "./dist/api/endpoints/show.endpoint.cjs",
+      "import": "./dist/api/endpoints/show.endpoint.js",
+      "types": "./dist/api/endpoints/show.endpoint.d.ts"
+    },
+    "./api/sync": {
+      "require": "./dist/api/endpoints/sync.endpoint.cjs",
+      "import": "./dist/api/endpoints/sync.endpoint.js",
+      "types": "./dist/api/endpoints/sync.endpoint.d.ts"
+    },
+    "./api/user": {
+      "require": "./dist/api/endpoints/user.endpoint.cjs",
+      "import": "./dist/api/endpoints/user.endpoint.js",
+      "types": "./dist/api/endpoints/user.endpoint.d.ts"
     }
   },
   "files": [
@@ -106,8 +131,8 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@dvcol/base-http-client": "^1.13.1",
-    "@dvcol/common-utils": "^1.10.0"
+    "@dvcol/base-http-client": "^1.14.0",
+    "@dvcol/common-utils": "^1.11.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

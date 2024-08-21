@@ -112,9 +112,10 @@ export type SimklApiClientPagination = {
 
 export type SimklApiParamsPagination = Partial<Pick<SimklApiClientPagination, 'page' | 'limit'>>;
 
-export type SimklApiParams<T extends RecursiveRecord = RecursiveRecord, E extends SimklApiExtends = SimklApiExtends> = SimklApiParamsExtended<E> &
-  SimklApiParamsPagination &
-  T;
+export type SimklApiParams<
+  T extends RecursiveRecord | RecursiveRecord[] = RecursiveRecord,
+  E extends SimklApiExtends = SimklApiExtends,
+> = SimklApiParamsExtended<E> & SimklApiParamsPagination & T;
 
 export type SimklClientAuthentication = {
   access_token?: string;

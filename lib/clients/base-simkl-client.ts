@@ -160,6 +160,7 @@ export class BaseSimklClient extends BaseClient<SimklApiQuery, SimklApiResponse,
    */
   // eslint-disable-next-line class-methods-use-this -- implemented from abstract class
   protected _parseBody<T extends SimklApiParams = SimklApiParams>(template: BaseBody<string | keyof T>, params: T): BodyInit {
+    if (params.payload) return JSON.stringify(params.payload);
     return parseBody(template, params);
   }
 

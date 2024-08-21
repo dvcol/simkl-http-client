@@ -72,12 +72,7 @@ export const show = {
         },
       },
     },
-    transform: params => {
-      if (params.extended !== undefined && typeof params.extended === 'boolean') {
-        return { ...params, extended: params.extended ? SimklApiExtended.Full : undefined };
-      }
-      return params;
-    },
+    transform: SimklApiTransform.Extends[SimklApiExtended.Full],
   }),
   /**
    * Get trending TV series
