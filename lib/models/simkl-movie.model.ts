@@ -61,7 +61,7 @@ export type SimklMovie<T extends SimklEntityTypes = typeof SimklEntityType.Unkno
   ? SimklMovieShort
   : T extends typeof SimklEntityType.Extended
     ? SimklMovieExtended
-    : SimklMovieShort | SimklMovieExtended;
+    : SimklMovieShort & Partial<SimklMovieExtended>;
 
 export type SimklMovieIdRequest = {
   /** Simkl ID or IMDB ID. */
