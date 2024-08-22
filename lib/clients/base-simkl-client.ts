@@ -114,7 +114,7 @@ export class BaseSimklClient extends BaseClient<SimklApiQuery, SimklApiResponse,
     };
 
     if (template.opts?.auth === SimklApiAuthType.Client && !this.settings.client_id) {
-      throw new SimklInvalidParameterError('OAuth required: access_token is missing');
+      throw new SimklInvalidParameterError('Auth required: client_id is missing');
     }
     if (template.opts?.auth === SimklApiAuthType.User && !this.auth.access_token) {
       throw new SimklInvalidParameterError('OAuth required: access_token is missing');

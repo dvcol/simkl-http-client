@@ -1,4 +1,4 @@
-import { ApiError, InvalidCsrfError, InvalidParameterError, PollingExpiredError } from '@dvcol/base-http-client/utils/error';
+import { ApiError, InvalidCsrfError, InvalidParameterError, PollingCancelledError, PollingExpiredError } from '@dvcol/base-http-client/utils/error';
 
 import type { SimklApiResponse } from '~/models/simkl-client.model';
 
@@ -33,7 +33,7 @@ export class SimklPollingExpiredError extends PollingExpiredError {
   }
 }
 
-export class SimklPollingCancelledError extends Error {
+export class SimklPollingCancelledError extends PollingCancelledError {
   constructor(message?: string) {
     super(message);
     this.name = SimklErrorTypes.SimklPollingCancelledError;

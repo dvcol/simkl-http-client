@@ -37,8 +37,9 @@ You can also import any [endpoint by common scope](https://github.com/dvcol/simk
 ```ts
 
 import { SimklClient } from '@dvcol/simkl-http-client';
+import { anime } from '@dvcol/simkl-http-client/api/endpoints/anime';
+import { search } from '@dvcol/simkl-http-client/api/endpoints/search';
 import { minimalSimklApi } from '@dvcol/simkl-http-client/api/minimal';
-// TODO add endpoints
  
 import { Config } from '@dvcol/simkl-http-client/config';
 
@@ -47,7 +48,8 @@ import type { SimklClientSettings } from '@dvcol/simkl-http-client/models';
 
 const simklUsedApi = {
   ...minimalSimklApi,
-  // TODO add endpoints
+  anime,
+  search
 };
 
 const simklClientSettings: SimklClientSettings = {
@@ -56,8 +58,6 @@ const simklClientSettings: SimklClientSettings = {
   redirect_uri: '<Your simkl redirect uri>',
   
   endpoint: Config.endpoint,
-  TokenTTL: Config.TokenTTL,
-  RefreshTokenTTL: Config.RefreshTokenTTL,
 
   useragent: '<Your user Agent>',
   corsProxy: '<Optional cors Proxy>',
@@ -74,12 +74,12 @@ const simklClient = new SimklClient(simklClientSettings, initAuthentication, sim
 
 [//]: # (TODO update this section)
 
-* [Built-in cache support](https://github.com/dvcol/simkl-http-client/blob/862718a3a51083a5f63f1ab15cc1e9aaf1b081af/lib/clients/simkl-client.test.ts#L79-L155) (per client, endpoint, or query)
-* [Extensible cache store](https://github.com/dvcol/simkl-http-client/blob/862718a3a51083a5f63f1ab15cc1e9aaf1b081af/lib/clients/simkl-client.test.ts#L135-L154) (in-memory, local storage, etc.)
+* [Built-in cache support](https://github.com/dvcol/simkl-http-client/blob/2bedf54a661560b350845f2640cc9090e98c7c7f/lib/clients/simkl-client.test.ts#L89-L165) (per client, endpoint, or query)
+* [Extensible cache store](https://github.com/dvcol/simkl-http-client/blob/2bedf54a661560b350845f2640cc9090e98c7c7f/lib/clients/simkl-client.test.ts#L145-L164) (in-memory, local storage, etc.)
 * [Event observer](https://github.com/dvcol/base-http-client/blob/ed17c369f3cdf93656568373fc2dba841050e427/lib/client/base-client.test.ts#L486-L575) (request, query, auth)
 * [Built-in cancellation support](https://github.com/dvcol/base-http-client/blob/ed17c369f3cdf93656568373fc2dba841050e427/lib/client/base-client.test.ts#L691-L758)
-* [Code redirect authentication](https://github.com/dvcol/simkl-http-client/blob/862718a3a51083a5f63f1ab15cc1e9aaf1b081af/lib/clients/simkl-client.ts#L40-L130)
-* [Token refresh](https://github.com/dvcol/simkl-http-client/blob/862718a3a51083a5f63f1ab15cc1e9aaf1b081af/lib/clients/simkl-client.ts#L132-L170)
+* [Code redirect authentication](https://github.com/dvcol/simkl-http-client/blob/2bedf54a661560b350845f2640cc9090e98c7c7f/lib/clients/simkl-client.ts#L62-L118)
+* [Device code polling](https://github.com/dvcol/simkl-http-client/blob/2bedf54a661560b350845f2640cc9090e98c7c7f/lib/clients/simkl-client.ts#L203-L243)
 
 ### Documentation
 
