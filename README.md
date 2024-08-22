@@ -37,9 +37,9 @@ You can also import any [endpoint by common scope](https://github.com/dvcol/simk
 ```ts
 
 import { SimklClient } from '@dvcol/simkl-http-client';
-import { anime } from '@dvcol/simkl-http-client/api/endpoints/anime';
-import { search } from '@dvcol/simkl-http-client/api/endpoints/search';
+import { anime } from '@dvcol/simkl-http-client/api/anime';
 import { minimalSimklApi } from '@dvcol/simkl-http-client/api/minimal';
+import { search } from '@dvcol/simkl-http-client/api/search';
  
 import { Config } from '@dvcol/simkl-http-client/config';
 
