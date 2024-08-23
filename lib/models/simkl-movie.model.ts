@@ -52,9 +52,9 @@ export type SimklMovieExtended = SimklMovieShort & {
   languages: string;
   alt_titles: SimklAlternativeTitle[];
   ratings: SimklRatings<'simkl' | 'imdb'>;
-  trailer: SimklTrailer[];
+  trailers?: SimklTrailer[];
   release_dates: SimklLocalReleaseDate[];
-  users_recommendations: SimklMovieRecommendation[];
+  users_recommendations?: SimklMovieRecommendation[];
 };
 
 export type SimklMovie<T extends SimklEntityTypes = typeof SimklEntityType.Unknown> = T extends typeof SimklEntityType.Short

@@ -87,7 +87,7 @@ export type SimklAnimeExtended = SimklAnimeShort & {
   status: SimklAnimeAndShowStatuses;
   network: string;
   ratings?: SimklRatings<'simkl' | 'mal'>;
-  trailer?: SimklTrailer[];
+  trailers?: SimklTrailer[];
   user_recommendations?: SimklAnimeRecommendation[];
   relations?: SimklAnimeRelation[];
 };
