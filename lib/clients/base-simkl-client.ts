@@ -42,31 +42,30 @@ export const isResponseOk = (response: Response) => {
 };
 
 /**
- * Parses a API response to extract {@link SimklApiClientPagination} information.
+ * Parses an API response to extract {@link SimklApiClientPagination} information.
  *
- * @private
- *
- * @template T - The type of the response.
+ * @template P - The type of the parameter.
+ * @template R - The type of the response.
  *
  * @param {Response} response - The fetch response.
+ * @param {SimklApiTemplate} template - The template for the API endpoint.
  *
- * @returns {SimklApiResponse<T>} The parsed API response.
+ * @returns {SimklApiResponse<R>} The parsed API response.
  */
-export const parseResponse = <T>(response: SimklApiResponse<T>): SimklApiResponse<T> => {
+export const parseResponse = <P, R = unknown>(response: SimklApiResponse<R>, template?: SimklApiTemplate<P>): SimklApiResponse<R> => {
   isResponseOk(response);
-
+  if (template?.opts?.pagination) response.pagination = { itemCount: null, pageCount: 1, limit: null, page: 1 };
   if (
     response.headers.has(SimklApiHeader.XPaginationItemCount) ||
     response.headers.has(SimklApiHeader.XPaginationPageCount) ||
     response.headers.has(SimklApiHeader.XPaginationLimit) ||
     response.headers.has(SimklApiHeader.XPaginationPage)
   ) {
-    response.pagination = {
-      itemCount: Number(response.headers.get(SimklApiHeader.XPaginationItemCount)),
-      pageCount: Number(response.headers.get(SimklApiHeader.XPaginationPageCount)),
-      limit: Number(response.headers.get(SimklApiHeader.XPaginationLimit)),
-      page: Number(response.headers.get(SimklApiHeader.XPaginationPage)),
-    };
+    if (!response.pagination) response.pagination = { itemCount: null, pageCount: 1, limit: null, page: 1 };
+    response.pagination.itemCount = Number(response.headers.get(SimklApiHeader.XPaginationItemCount));
+    response.pagination.pageCount = Number(response.headers.get(SimklApiHeader.XPaginationPageCount));
+    response.pagination.limit = Number(response.headers.get(SimklApiHeader.XPaginationLimit));
+    response.pagination.page = Number(response.headers.get(SimklApiHeader.XPaginationPage));
   }
 
   return response;

@@ -181,6 +181,20 @@ describe('base-simkl-client.ts', () => {
       });
     });
 
+    it('should parse a response with pagination headers if template is provided', () => {
+      expect.assertions(1);
+
+      const response = new Response();
+      const parsed = parseResponse(response, mockTemplate);
+
+      expect(parsed.pagination).toMatchObject({
+        itemCount: null,
+        pageCount: 1,
+        limit: null,
+        page: 1,
+      });
+    });
+
     it('should throw on failed fetch response', async () => {
       expect.assertions(1);
 
