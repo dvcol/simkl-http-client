@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/dvcol/simkl-http-client/compare/v1.1.6...v1.1.7) (2024-08-26)
+
+
+### Bug Fixes
+
+* **pagination:** always return pagination object for paginated endpoints ([68e5986](https://github.com/dvcol/simkl-http-client/commit/68e5986759f1ccf863c4f6cc24b36799b30e9f39))
+
 ### [1.1.6](https://github.com/dvcol/simkl-http-client/compare/v1.1.5...v1.1.6) (2024-08-26)
 
 ### [1.1.5](https://github.com/dvcol/simkl-http-client/compare/v1.1.4...v1.1.5) (2024-08-26)

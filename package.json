@@ -1,7 +1,7 @@
 {
   "name": "@dvcol/simkl-http-client",
   "type": "module",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "packageManager": "pnpm@9.7.0",
   "description": "Simple fetch based http client for Simkl API with full typescript support (request and response)",
   "homepage": "https://github.com/dvcol/simkl-http-client",
